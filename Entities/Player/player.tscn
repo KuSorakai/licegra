@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://b3fjkk3iqryfu"]
+
+[ext_resource type="Texture2D" uid="uid://da6ekqyyq3aam" path="res://Assets/Graphics/icon.svg" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://1pxcp037c8of" path="res://Entities/Player/player.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://bbpib0xp8ud7" path="res://Entities/Projectiles/bullet.tscn" id="2_i3pqv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
+size = Vector2(119, 121)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lu8i8"]
+radius = 127.03543
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lu8i8"]
+bg_color = Color(0, 0.7137255, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tekja"]
+bg_color = Color(0.17650408, 0.13808936, 1, 1)
+
+[node name="Player" type="CharacterBody2D" unique_id=1561773624 groups=["player"]]
+script = ExtResource("1_onrkg")
+bullet_scene = ExtResource("2_i3pqv")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1564805234]
+texture = ExtResource("1_4flbx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1494016846]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_onrkg")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=38722719]
+
+[node name="WeaponPivot" type="Node2D" parent="." unique_id=411100362]
+
+[node name="WeaponMesh" type="Sprite2D" parent="WeaponPivot" unique_id=2080639458]
+position = Vector2(40, 0)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_4flbx")
+
+[node name="Muzzle" type="Marker2D" parent="WeaponPivot/WeaponMesh" unique_id=1564159951]
+position = Vector2(60, 3)
+
+[node name="MagnetArea" type="Area2D" parent="." unique_id=1728429447]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MagnetArea" unique_id=1999086566]
+shape = SubResource("CircleShape2D_lu8i8")
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1325297156]
+offset_left = -59.0
+offset_top = -74.0
+offset_right = 60.0
+offset_bottom = -70.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_lu8i8")
+max_value = 5.0
+value = 5.0
+show_percentage = false
+
+[node name="ManaBar" type="ProgressBar" parent="." unique_id=1022776105]
+offset_left = -59.0
+offset_top = -68.0
+offset_right = 60.0
+offset_bottom = -64.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_tekja")
+max_value = 5.0
+value = 5.0
+show_percentage = false
+
+[connection signal="area_entered" from="MagnetArea" to="." method="_on_magnet_area_area_entered"]

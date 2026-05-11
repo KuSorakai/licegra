@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://d8rexek7srst"]
+
+[ext_resource type="Script" uid="uid://dsw3ypyo66y1d" path="res://Resources/item_data.gd" id="1_21d6m"]
+
+[resource]
+script = ExtResource("1_21d6m")
+item_name = "Amulet Zdrowia"
+bonus_max_hp = 5
+metadata/_custom_type_script = "uid://dsw3ypyo66y1d"

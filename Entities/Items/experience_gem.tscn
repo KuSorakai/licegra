@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cxavvdg6vt0mb"]
+
+[ext_resource type="Script" uid="uid://nchv3226trlp" path="res://Entities/Items/experience_gem.gd" id="1_p02ur"]
+[ext_resource type="Texture2D" uid="uid://bik8fuqj46gce" path="res://Assets/Graphics/EXP.png" id="1_wqcmo"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p02ur"]
+radius = 1.0
+height = 4.0
+
+[node name="ExperienceGem" type="Area2D" unique_id=411013786]
+script = ExtResource("1_p02ur")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1283278865]
+texture = ExtResource("1_wqcmo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=746212407]
+shape = SubResource("CapsuleShape2D_p02ur")
+
+[connection signal="area_entered" from="." to="." method="_on_magnet_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

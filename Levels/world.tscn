@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://cd8jhysroa5pi"]
+
+[ext_resource type="Texture2D" uid="uid://da6ekqyyq3aam" path="res://Assets/Graphics/icon.svg" id="1_fj7yv"]
+[ext_resource type="PackedScene" uid="uid://b3fjkk3iqryfu" path="res://Entities/Player/player.tscn" id="2_tlwt5"]
+[ext_resource type="Resource" uid="uid://bug40rij86dhy" path="res://Resources/pistol.tres" id="3_ks8n1"]
+[ext_resource type="PackedScene" uid="uid://cjmc8vtj8tcf4" path="res://Entities/Enemies/enemy.tscn" id="3_tlwt5"]
+[ext_resource type="Script" uid="uid://dsw3ypyo66y1d" path="res://Resources/item_data.gd" id="3_vqnaq"]
+[ext_resource type="Script" uid="uid://b1rhhm3tx8pln" path="res://Levels/game_manager.gd" id="4_4dvsh"]
+[ext_resource type="Resource" uid="uid://qm7g6iveieq2" path="res://Resources/ring_of_power.tres" id="4_rljl1"]
+[ext_resource type="PackedScene" uid="uid://cfrumtbu1gxlm" path="res://Entities/Enemies/triangle.tscn" id="8_7ey7r"]
+[ext_resource type="PackedScene" uid="uid://dupcoa7fuq8gn" path="res://UI/level_up_screen.tscn" id="8_rljl1"]
+[ext_resource type="PackedScene" uid="uid://c24mg71h7wvp6" path="res://UI/game_over_screen.tscn" id="9_06jdw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fj7yv"]
+size = Vector2(1728, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tlwt5"]
+size = Vector2(1728, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aqk2v"]
+size = Vector2(100, 972)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_036b0"]
+size = Vector2(100, 972)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4dvsh"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.12941177, 0, 1, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ks8n1"]
+content_margin_left = 15.0
+content_margin_top = 15.0
+content_margin_right = 15.0
+content_margin_bottom = 15.0
+bg_color = Color(0.7019608, 0, 0, 1)
+corner_radius_top_left = 50
+corner_radius_top_right = 50
+corner_radius_bottom_right = 50
+corner_radius_bottom_left = 50
+
+[node name="World" type="Node2D" unique_id=587880756]
+
+[node name="Ground" type="TextureRect" parent="." unique_id=1414272871]
+custom_minimum_size = Vector2(1728, 972)
+offset_left = -841.0
+offset_top = -527.0
+offset_right = 887.0
+offset_bottom = 445.0
+texture = ExtResource("1_fj7yv")
+stretch_mode = 1
+
+[node name="Player" parent="." unique_id=1561773624 instance=ExtResource("2_tlwt5")]
+position = Vector2(135, 65)
+starting_items = Array[ExtResource("3_vqnaq")]([ExtResource("4_rljl1")])
+current_weapon = ExtResource("3_ks8n1")
+
+[node name="ArenaBounds" type="StaticBody2D" parent="." unique_id=1708048541]
+
+[node name="WallTop" type="CollisionShape2D" parent="ArenaBounds" unique_id=301685215]
+position = Vector2(0, -486)
+shape = SubResource("RectangleShape2D_fj7yv")
+
+[node name="WallBottom" type="CollisionShape2D" parent="ArenaBounds" unique_id=1920603332]
+position = Vector2(0, 486)
+shape = SubResource("RectangleShape2D_tlwt5")
+
+[node name="WallLeft" type="CollisionShape2D" parent="ArenaBounds" unique_id=576720328]
+position = Vector2(-864, 0)
+shape = SubResource("RectangleShape2D_aqk2v")
+
+[node name="WallRight" type="CollisionShape2D" parent="ArenaBounds" unique_id=976884432]
+position = Vector2(864, 0)
+shape = SubResource("RectangleShape2D_036b0")
+
+[node name="GameManager" type="Node" parent="." unique_id=1422348163 groups=["game_manager"]]
+script = ExtResource("4_4dvsh")
+enemy_scene = ExtResource("3_tlwt5")
+triangle_scene = ExtResource("8_7ey7r")
+
+[node name="RoundTimer" type="Timer" parent="GameManager" unique_id=1017503396]
+wait_time = 15.0
+one_shot = true
+autostart = true
+
+[node name="SpawnTimer" type="Timer" parent="GameManager" unique_id=1054509024]
+wait_time = 1.5
+autostart = true
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1325269775]
+
+[node name="TopLabel" type="Label" parent="HUD" unique_id=874085703]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -73.5
+offset_right = 73.5
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Runda: 1 | Czas: 60"
+
+[node name="ManaUI" type="Label" parent="HUD" unique_id=1662425263]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_4dvsh")
+text = "10"
+
+[node name="HpUI" type="Label" parent="HUD" unique_id=1037890280]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 40.0
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_ks8n1")
+text = "5"
+
+[node name="ExpBar" type="ProgressBar" parent="HUD" unique_id=673440926 groups=["exp_bar"]]
+offset_left = 144.0
+offset_top = 604.0
+offset_right = 1039.0
+offset_bottom = 631.0
+
+[node name="LevelUpScreen" parent="HUD" unique_id=1461312053 instance=ExtResource("8_rljl1")]
+
+[node name="GameOverScreen" parent="HUD" unique_id=820338797 instance=ExtResource("9_06jdw")]
+
+[connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]
+[connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="_on_spawn_timer_timeout"]
