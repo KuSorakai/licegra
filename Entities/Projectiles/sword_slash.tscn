@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://byg7bpr547684"]
+
+[ext_resource type="Script" uid="uid://cig2xnc7tmckj" path="res://bullet.gd" id="1_cl6ki"]
+[ext_resource type="Texture2D" uid="uid://dqljifvgeflng" path="res://Assets/Graphics/SwordSlash.png" id="1_t08h3"]
+
+[node name="SwordSlash" type="Area2D" unique_id=567122159]
+script = ExtResource("1_cl6ki")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=810060928]
+modulate = Color(0.11658011, 0.21988809, 0.32567757, 1)
+texture = ExtResource("1_t08h3")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=2113540957]
+polygon = PackedVector2Array(16, -29, -1, -28, -19, -8, -21, 16, -11, 31, -12, 6, -11, -6, 1, -22)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -7,6 +7,8 @@ class_name WeaponData
 @export var base_attack: float = 1.0
 @export var attack_speed: float = 1.0
 @export var range: float = 400.0
+@export var projectile_scene: PackedScene # Wygląd pocisku/ataku
+@export var piercing: int = 1 # 1 = znika po 1 wrogu. 999 = tnie wszystkich!
 @export var projectiles: int = 1
 @export var crit_chance: float = 0.05 # 0.05 oznacza 5%
 @export var crit_multiplier: float = 1.5

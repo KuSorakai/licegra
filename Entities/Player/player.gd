@@ -75,8 +75,9 @@ func _physics_process(delta: float) -> void:
 		add_exp(5) # Daje 5 EXP natychmiast
 	
 func shoot() -> void:
-	if bullet_scene != null:
-		var bullet = bullet_scene.instantiate()
+	# SPRAWDZAMY CZY BROŃ MA PRZYPISANĄ SCENĘ POCISKU
+	if current_weapon.projectile_scene != null:
+		var bullet = current_weapon.projectile_scene.instantiate()
 		get_tree().root.add_child(bullet)
 		bullet.global_transform = muzzle.global_transform
 		
@@ -97,6 +98,7 @@ func shoot() -> void:
 		
 		bullet.damage = final_damage
 		bullet.max_range = final_range
+		bullet.max_pierce = current_weapon.piercing # PRZEKAZUJEMY PRZEBICIE!
 		
 # Nasza nowa funkcja wykonująca unik
 func perform_dash() -> void:
