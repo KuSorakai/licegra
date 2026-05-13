@@ -238,7 +238,7 @@ func calculate_stats() -> void:
 		total_bonus_max_hp += item.bonus_max_hp
 		total_bonus_speed += item.bonus_speed
 		total_crit_chance += item.bonus_crit_chance
-		total_projectile_count += item.bonus_projectile_count
+		total_projectile_count += item.bonus_projectiles
 		total_dash_count += item.bonus_dashes
 		
 	# 3. Zastosowanie dodatkowego HP do paska nad głową
