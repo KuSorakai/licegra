@@ -3,6 +3,7 @@ extends Resource
 class_name WeaponData
 
 @export var weapon_name: String = "Nowa Broń"
+@export var icon: Texture2D # Zmienna na ikonę broni
 @export_enum("Tier 1 (Biały)", "Tier 2 (Niebieski)", "Tier 3 (Fioletowy)", "Tier 4 (Legendarny)") var tier: int = 0
 @export var base_attack: float = 1.0
 @export var attack_speed: float = 1.0

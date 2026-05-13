@@ -2,6 +2,7 @@ extends Resource
 class_name ItemData
 
 @export var item_name: String = "Nowy Przedmiot"
+@export var icon: Texture2D # Zmienna na ikonę przedmiotu
 @export_multiline var description: String = "" # export_multiline daje duże pole tekstowe
 @export var tags: Array[String] = [] # np. ["magic", "melee", "ALL"]
 

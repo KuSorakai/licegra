@@ -207,6 +207,14 @@ func add_item(item: ItemData) -> void:
 	inventory.append(item)
 	calculate_stats()
 	print("Dodano przedmiot: ", item.item_name)
+	# --- NOWE: DODAJEMY IKONKĘ DO PASKA ---
+	var items_container = get_node_or_null("../HUD/ItemsContainer")
+	if items_container != null and item.icon != null:
+		var new_icon = TextureRect.new() # Tworzymy nowy obrazek w locie
+		new_icon.texture = item.icon
+		new_icon.custom_minimum_size = Vector2(40, 40) # Rozmiar ikonki przedmiotu
+		new_icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		items_container.add_child(new_icon) # Wrzucamy do rzędu!
 
 # Ta funkcja liczy wszystkie bonusy od zera
 func calculate_stats() -> void:
@@ -243,3 +251,11 @@ func get_nearest_enemy() -> Node2D:
 			min_dist = dist
 			nearest = e
 	return nearest
+	# Używamy tej funkcji do zmiany broni, żeby od razu zaktualizować interfejs!
+func equip_weapon(new_weapon: WeaponData) -> void:
+	current_weapon = new_weapon
+	
+	# Szukamy naszego węzła z ikoną broni na ekranie
+	var weapon_icon_rect = get_node_or_null("../HUD/WeaponIcon")
+	if weapon_icon_rect != null and current_weapon.icon != null:
+		weapon_icon_rect.texture = current_weapon.icon

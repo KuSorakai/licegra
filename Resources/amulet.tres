@@ -1,9 +1,11 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://d8rexek7srst"]
 
 [ext_resource type="Script" uid="uid://dsw3ypyo66y1d" path="res://Resources/item_data.gd" id="1_21d6m"]
+[ext_resource type="Texture2D" uid="uid://bqxcmsll5ovtl" path="res://Assets/Graphics/Ac_Necklace01.png" id="1_digdx"]
 
 [resource]
 script = ExtResource("1_21d6m")
 item_name = "Amulet Zdrowia"
+icon = ExtResource("1_digdx")
 bonus_max_hp = 5
 metadata/_custom_type_script = "uid://dsw3ypyo66y1d"

@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://beltl8q68dngx"]
 
+[ext_resource type="Texture2D" uid="uid://cyewwegikx0e8" path="res://Assets/Graphics/W_Sword001.png" id="1_0bu56"]
 [ext_resource type="Script" uid="uid://0j0it5oiaiep" path="res://Resources/weapon_data.gd" id="1_ngbdt"]
 [ext_resource type="PackedScene" uid="uid://byg7bpr547684" path="res://Entities/Projectiles/sword_slash.tscn" id="1_pk6ra"]
 
 [resource]
 script = ExtResource("1_ngbdt")
 weapon_name = "Miecz"
+icon = ExtResource("1_0bu56")
 range = 150.0
 projectile_scene = ExtResource("1_pk6ra")
 piercing = 99

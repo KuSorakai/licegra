@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://da6ekqyyq3aam" path="res://Assets/Graphics/icon.svg" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://b3fjkk3iqryfu" path="res://Entities/Player/player.tscn" id="2_tlwt5"]
-[ext_resource type="Resource" uid="uid://dt7eyk1b45ugo" path="res://Resources/fire_wand.tres" id="3_rljl1"]
 [ext_resource type="PackedScene" uid="uid://cjmc8vtj8tcf4" path="res://Entities/Enemies/enemy.tscn" id="3_tlwt5"]
 [ext_resource type="Script" uid="uid://b1rhhm3tx8pln" path="res://Levels/game_manager.gd" id="4_4dvsh"]
+[ext_resource type="PackedScene" uid="uid://wht6skhu31kf" path="res://UI/weapon_choice_screen.tscn" id="8_06jdw"]
 [ext_resource type="PackedScene" uid="uid://cfrumtbu1gxlm" path="res://Entities/Enemies/triangle.tscn" id="8_7ey7r"]
 [ext_resource type="PackedScene" uid="uid://dupcoa7fuq8gn" path="res://UI/level_up_screen.tscn" id="8_rljl1"]
 [ext_resource type="PackedScene" uid="uid://c24mg71h7wvp6" path="res://UI/game_over_screen.tscn" id="9_06jdw"]
@@ -56,7 +56,6 @@ stretch_mode = 1
 
 [node name="Player" parent="." unique_id=1561773624 instance=ExtResource("2_tlwt5")]
 position = Vector2(135, 65)
-current_weapon = ExtResource("3_rljl1")
 
 [node name="ArenaBounds" type="StaticBody2D" parent="." unique_id=1708048541]
 
@@ -101,6 +100,7 @@ offset_right = 73.5
 offset_bottom = 23.0
 grow_horizontal = 2
 text = "Runda: 1 | Czas: 60"
+horizontal_alignment = 1
 
 [node name="ManaUI" type="Label" parent="HUD" unique_id=1662425263]
 anchors_preset = 3
@@ -134,6 +134,26 @@ offset_bottom = 631.0
 [node name="LevelUpScreen" parent="HUD" unique_id=1461312053 instance=ExtResource("8_rljl1")]
 
 [node name="GameOverScreen" parent="HUD" unique_id=820338797 instance=ExtResource("9_06jdw")]
+
+[node name="TimeLabel" type="Label" parent="HUD" unique_id=1633179803]
+offset_left = 559.0
+offset_top = 29.0
+offset_right = 599.0
+offset_bottom = 52.0
+theme_override_font_sizes/font_size = 40
+horizontal_alignment = 1
+
+[node name="WeaponChoiceScreen" parent="HUD" unique_id=1608615964 instance=ExtResource("8_06jdw")]
+
+[node name="WeaponIcon" type="TextureRect" parent="HUD" unique_id=627543018]
+offset_right = 64.0
+offset_bottom = 64.0
+expand_mode = 1
+
+[node name="ItemsContainer" type="HBoxContainer" parent="HUD" unique_id=2128213843]
+offset_top = 65.0
+offset_right = 40.0
+offset_bottom = 105.0
 
 [connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]
 [connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="_on_spawn_timer_timeout"]

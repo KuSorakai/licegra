@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://wht6skhu31kf"]
+
+[ext_resource type="Script" uid="uid://bdaoatpyyul6x" path="res://UI/weapon_choice_screen.gd" id="1_1hcsx"]
+[ext_resource type="Script" uid="uid://0j0it5oiaiep" path="res://Resources/weapon_data.gd" id="2_dhm53"]
+[ext_resource type="Resource" uid="uid://bug40rij86dhy" path="res://Resources/pistol.tres" id="3_hyvsv"]
+[ext_resource type="Resource" uid="uid://beltl8q68dngx" path="res://Resources/sword.tres" id="4_l14ts"]
+[ext_resource type="Resource" uid="uid://c0c65afqd4uet" path="res://Resources/freeze_wand.tres" id="5_hyvsv"]
+[ext_resource type="Resource" uid="uid://dt7eyk1b45ugo" path="res://Resources/fire_wand.tres" id="5_xp1ae"]
+[ext_resource type="Resource" uid="uid://8mtwoh6jy783" path="res://Resources/shock_wand.tres" id="7_l14ts"]
+
+[node name="WeaponChoiceScreen" type="CanvasLayer" unique_id=1608615964]
+process_mode = 3
+script = ExtResource("1_1hcsx")
+weapon_pool = Array[ExtResource("2_dhm53")]([ExtResource("3_hyvsv"), ExtResource("4_l14ts"), ExtResource("5_hyvsv"), ExtResource("5_xp1ae"), ExtResource("7_l14ts")])
+
+[node name="Background" type="ColorRect" parent="." unique_id=1325828229]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05882353, 0.05882353, 0.05882353, 0.5882353)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background" unique_id=932372607]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -75.0
+offset_right = 245.0
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Weapon1" type="Button" parent="Background/HBoxContainer" unique_id=1617112221]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="Weapon2" type="Button" parent="Background/HBoxContainer" unique_id=1852889758]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="Weapon3" type="Button" parent="Background/HBoxContainer" unique_id=2050629575]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+
+[node name="StatsLabel" type="Label" parent="Background" unique_id=1049935399]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -41.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 29.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 20
+
+[connection signal="pressed" from="Background/HBoxContainer/Weapon1" to="." method="_on_weapon_1_pressed"]
+[connection signal="pressed" from="Background/HBoxContainer/Weapon2" to="." method="_on_weapon_2_pressed"]
+[connection signal="pressed" from="Background/HBoxContainer/Weapon3" to="." method="_on_weapon_3_pressed"]

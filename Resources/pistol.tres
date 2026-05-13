@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://bug40rij86dhy"]
 
 [ext_resource type="PackedScene" uid="uid://bbpib0xp8ud7" path="res://Entities/Projectiles/bullet.tscn" id="1_7j71y"]
+[ext_resource type="Texture2D" uid="uid://brrt5n70c0gcj" path="res://Assets/Graphics/W_Gun003.png" id="1_56pew"]
 [ext_resource type="Script" uid="uid://0j0it5oiaiep" path="res://Resources/weapon_data.gd" id="1_tkhkc"]
 
 [resource]
 script = ExtResource("1_tkhkc")
 weapon_name = "Pistolet"
+icon = ExtResource("1_56pew")
 attack_speed = 2.5
 projectile_scene = ExtResource("1_7j71y")
 tags = Array[String](["range", "projectile"])

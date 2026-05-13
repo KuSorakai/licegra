@@ -9,14 +9,17 @@ extends Node
 @onready var round_timer = $RoundTimer
 
 @onready var top_label = $"../HUD/TopLabel"
+@onready var time_label = $"../HUD/TimeLabel"
 
 var current_round: int = 1
 
 func _process(delta: float) -> void:
-	# _process wykonuje się co klatkę. Aktualizujemy zegar:
 	if not round_timer.is_stopped():
 		var time_left = int(round_timer.time_left)
-		top_label.text = "Runda: " + str(current_round) + " | Czas: " + str(time_left)
+		# Runda idzie do górnego napisu
+		top_label.text = "Runda: " + str(current_round)
+		# Sam czas idzie do nowego, wielkiego napisu
+		time_label.text = str(time_left)
 
 func _ready() -> void:
 	print("Rozpoczynam RUNDĘ ", current_round)

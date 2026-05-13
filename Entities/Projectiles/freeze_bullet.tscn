@@ -12,7 +12,7 @@ script = ExtResource("1_4vffm")
 speed = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=444102957]
-modulate = Color(0.8989366, 0.45108998, 0.29291764, 1)
+modulate = Color(0.05882353, 0.24313726, 0.7529412, 1)
 rotation = 3.1415927
 scale = Vector2(1.4358976, 1.5555557)
 texture = ExtResource("2_4vffm")

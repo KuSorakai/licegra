@@ -46,6 +46,18 @@ layout_mode = 2
 custom_minimum_size = Vector2(150, 200)
 layout_mode = 2
 
+[node name="StatsLabel" type="Label" parent="Background" unique_id=599610363]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -41.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 24.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 20
+
 [connection signal="pressed" from="Background/CardsContainer/Card1" to="." method="_on_card_1_pressed"]
 [connection signal="pressed" from="Background/CardsContainer/Card2" to="." method="_on_card_2_pressed"]
 [connection signal="pressed" from="Background/CardsContainer/Card3" to="." method="_on_card_3_pressed"]
