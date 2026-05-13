@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://dt7eyk1b45ugo"]
+
+[ext_resource type="Script" uid="uid://0j0it5oiaiep" path="res://Resources/weapon_data.gd" id="1_v5g0w"]
+
+[resource]
+script = ExtResource("1_v5g0w")
+weapon_name = "Różdżka ognia"
+status_effect = "Fire"
+mana_cost = 2.0
+tags = Array[String](["magic", "fire"])
+metadata/_custom_type_script = "uid://0j0it5oiaiep"

@@ -5,6 +5,9 @@ var dash_speed: float = 900.0 # Prędkość podczas uniku
 var is_dashing: bool = false
 var can_dash: bool = true
 var hp: int = 5
+var mana: float = 10.0
+var base_max_mana: float = 10.0
+var mana_regen: float = 3.0 # Odnawia 3 pkt many na sekundę
 var current_exp: int = 0
 var level: int = 1
 var exp_to_next_level: int = 5 # Pierwszy próg z GDD
@@ -54,10 +57,27 @@ func _physics_process(delta: float) -> void:
 		
 	move_and_slide()
 	
+	# --- REGENERACJA MANY ---
+	var current_max_mana = base_max_mana + total_bonus_max_mana
+	if mana < current_max_mana:
+		mana += mana_regen * delta
+		if mana > current_max_mana: mana = current_max_mana
+		
+	if mana_bar != null:
+		mana_bar.max_value = current_max_mana
+		mana_bar.value = mana
+	
 	# --- CELOWANIE ---
-	# Wbudowana funkcja look_at sprawia, że węzeł "patrzy" na podany punkt.
-	# W tym przypadku tym punktem jest globalna pozycja kursora myszy na ekranie.
-	weapon_pivot.look_at(get_global_mouse_position())
+	# Jeśli broń ma tag "magic", szukamy wroga. Jak nie ma, strzelamy myszką.
+	if current_weapon != null and "magic" in current_weapon.tags:
+		var nearest = get_nearest_enemy()
+		if nearest != null:
+			weapon_pivot.look_at(nearest.global_position)
+		else:
+			weapon_pivot.look_at(get_global_mouse_position())
+	else:
+		weapon_pivot.look_at(get_global_mouse_position())
+		
 	# --- STRZELANIE Z UŻYCIEM DANYCH Z BRONI ---
 	# Odliczamy czas stopera
 	if shoot_timer > 0:
@@ -75,11 +95,20 @@ func _physics_process(delta: float) -> void:
 		add_exp(5) # Daje 5 EXP natychmiast
 	
 func shoot() -> void:
+	# SPRAWDZAMY KOSZT MANY
+	if current_weapon.mana_cost > 0:
+		if mana >= current_weapon.mana_cost:
+			mana -= current_weapon.mana_cost # Pobieramy manę
+		else:
+			return # Brak many = przerywamy strzał!
 	# SPRAWDZAMY CZY BROŃ MA PRZYPISANĄ SCENĘ POCISKU
 	if current_weapon.projectile_scene != null:
 		var bullet = current_weapon.projectile_scene.instantiate()
 		get_tree().root.add_child(bullet)
 		bullet.global_transform = muzzle.global_transform
+		
+		# PRZEKAZANIE STATUSU Z BRONI DO POCISKU
+		bullet.status_effect = current_weapon.status_effect
 		
 		# --- OBLICZANIE MNOŻNIKA RZADKOŚCI ---
 		var rarity_mult: float = 1.0
@@ -202,3 +231,14 @@ func calculate_stats() -> void:
 		health_bar.value = hp
 		
 	print("Przeliczono! Speed: +", total_bonus_speed, " Max HP: +", total_bonus_max_hp)
+	
+func get_nearest_enemy() -> Node2D:
+	var enemies = get_tree().get_nodes_in_group("enemy")
+	var nearest = null
+	var min_dist = INF
+	for e in enemies:
+		var dist = global_position.distance_to(e.global_position)
+		if dist < min_dist:
+			min_dist = dist
+			nearest = e
+	return nearest

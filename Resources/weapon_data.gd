@@ -13,4 +13,5 @@ class_name WeaponData
 @export var crit_chance: float = 0.05 # 0.05 oznacza 5%
 @export var crit_multiplier: float = 1.5
 @export var status_effect: String = "" # np. "Fire", "Freeze", "Shock"
+@export var mana_cost: float = 0.0 # Koszt many za jeden strzał
 @export var tags: Array[String] = [] # np. ["range", "projectile"]

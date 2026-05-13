@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://da6ekqyyq3aam" path="res://Assets/Graphics/icon.svg" id="1_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://b3fjkk3iqryfu" path="res://Entities/Player/player.tscn" id="2_tlwt5"]
-[ext_resource type="Resource" uid="uid://beltl8q68dngx" path="res://Resources/sword.tres" id="3_rljl1"]
+[ext_resource type="Resource" uid="uid://dt7eyk1b45ugo" path="res://Resources/fire_wand.tres" id="3_rljl1"]
 [ext_resource type="PackedScene" uid="uid://cjmc8vtj8tcf4" path="res://Entities/Enemies/enemy.tscn" id="3_tlwt5"]
 [ext_resource type="Script" uid="uid://b1rhhm3tx8pln" path="res://Levels/game_manager.gd" id="4_4dvsh"]
 [ext_resource type="PackedScene" uid="uid://cfrumtbu1gxlm" path="res://Entities/Enemies/triangle.tscn" id="8_7ey7r"]
