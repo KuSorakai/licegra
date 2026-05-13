@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="WeaponData" format=3 uid="uid://c0c65afqd4uet"]
 
 [ext_resource type="Script" uid="uid://0j0it5oiaiep" path="res://Resources/weapon_data.gd" id="1_880yl"]
+[ext_resource type="PackedScene" uid="uid://ckjco0j1bt7k6" path="res://Entities/Projectiles/freeze_bullet.tscn" id="1_jo4kj"]
 
 [resource]
 script = ExtResource("1_880yl")
 weapon_name = "Różdżka ICE"
 range = 500.0
+projectile_scene = ExtResource("1_jo4kj")
 status_effect = "Freeze"
 mana_cost = 2.0
 tags = Array[String](["magic", "ice", "range"])

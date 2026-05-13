@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed: float = 1000.0
+@export var speed: float = 1000.0
 var damage: float = 1.0 # Zmienna gotowa na przyjęcie ułamkowych danych z broni
 var status_effect: String = "" # Pusty string = brak statusu
 var max_range: float = 400.0 # Maksymalny zasięg z GDD

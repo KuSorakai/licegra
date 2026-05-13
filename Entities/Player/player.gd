@@ -105,7 +105,8 @@ func shoot() -> void:
 	if current_weapon.projectile_scene != null:
 		var bullet = current_weapon.projectile_scene.instantiate()
 		get_tree().root.add_child(bullet)
-		bullet.global_transform = muzzle.global_transform
+		bullet.global_position = muzzle.global_position
+		bullet.global_rotation = muzzle.global_rotation
 		
 		# PRZEKAZANIE STATUSU Z BRONI DO POCISKU
 		bullet.status_effect = current_weapon.status_effect

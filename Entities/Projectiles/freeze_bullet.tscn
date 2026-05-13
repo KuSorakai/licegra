@@ -7,11 +7,13 @@
 size = Vector2(12, 12)
 
 [node name="Bullet" type="Area2D" unique_id=1842714058]
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_4vffm")
+speed = 300.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=444102957]
 modulate = Color(0.8989366, 0.45108998, 0.29291764, 1)
-position = Vector2(1.3333335, -2.3841858e-07)
+rotation = 3.1415927
 scale = Vector2(1.4358976, 1.5555557)
 texture = ExtResource("2_4vffm")
 
