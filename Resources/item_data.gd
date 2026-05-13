@@ -20,4 +20,5 @@ class_name ItemData
 @export var bonus_projectiles: int = 0
 @export var bonus_damage_percent: float = 0.0 # np. 0.3 dla +30% Osełki
 @export var bonus_crit_chance: float = 0.0
+@export var bonus_dashes: int = 0
 @export var apply_status: String = "" # np. "Poison" z Fiolki Trucizny

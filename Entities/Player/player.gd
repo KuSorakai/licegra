@@ -24,6 +24,10 @@ var total_bonus_speed: float = 0.0 # NOWE
 @onready var health_bar = $HealthBar
 @onready var mana_bar = $ManaBar
 
+var total_crit_chance: float = 0.0
+var total_projectile_count: int = 0
+var total_dash_count: int = 0
+
 # Zmienna, do której podepniemy naszą scenę pocisku
 @export var bullet_scene: PackedScene
 # Zmienna na nasz plik z danymi broni (Resource)
@@ -223,6 +227,9 @@ func calculate_stats() -> void:
 	total_bonus_strength = 0
 	total_bonus_max_hp = 0
 	total_bonus_speed = 0.0
+	total_crit_chance = 0.0
+	total_projectile_count = 0
+	total_dash_count = 0
 	
 	# 2. Sumujemy statystyki
 	for item in inventory:
@@ -230,6 +237,9 @@ func calculate_stats() -> void:
 		total_bonus_strength += item.bonus_strength
 		total_bonus_max_hp += item.bonus_max_hp
 		total_bonus_speed += item.bonus_speed
+		total_crit_chance += item.bonus_crit_chance
+		total_projectile_count += item.bonus_projectile_count
+		total_dash_count += item.bonus_dashes
 		
 	# 3. Zastosowanie dodatkowego HP do paska nad głową
 	# Nasze bazowe HP to 5. Zwiększamy "pojemność" paska.

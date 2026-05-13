@@ -16,6 +16,7 @@ func _ready() -> void:
 	hide() # Na starcie gry ekran awansu jest niewidoczny
 	# Szukamy gracza za pomocą grupy
 	player = get_tree().get_first_node_in_group("player")
+	update_stats_display()
 	if player != null:
 		var st = "--- TWOJE STATYSTYKI ---\n"
 		st += "Zdrowie: " + str(player.hp) + " / " + str(5 + player.total_bonus_max_hp) + "\n"
@@ -27,6 +28,7 @@ func _ready() -> void:
 # Funkcja odpalana, gdy gracz zdobędzie level
 func trigger_level_up() -> void:
 	get_tree().paused = true # ZATRZYMUJEMY GRĘ!
+	update_stats_display()
 	show() # Pokazujemy ekran
 	
 	offered_items.clear()
@@ -47,12 +49,12 @@ func trigger_level_up() -> void:
 		card_2.text = offered_items[1].item_name
 		card_2.icon = offered_items[1].icon
 		card_2.expand_icon = true
-		card_1.tooltip_text = build_item_tooltip(offered_items[1])
+		card_2.tooltip_text = build_item_tooltip(offered_items[1])
 		
 		card_3.text = offered_items[2].item_name
 		card_3.icon = offered_items[2].icon
 		card_3.expand_icon = true
-		card_1.tooltip_text = build_item_tooltip(offered_items[2])
+		card_3.tooltip_text = build_item_tooltip(offered_items[2])
 
 # Gdy wybierzemy kartę, wywołujemy tę funkcję
 func select_item(index: int) -> void:
@@ -85,3 +87,23 @@ func build_item_tooltip(i: ItemData) -> String:
 	if i.bonus_damage_percent > 0: 
 		t += "Obrażenia: +" + str(i.bonus_damage_percent * 100) + "%\n"
 	return t
+func update_stats_display() -> void:
+	if player == null: return
+	
+	var st = "=== STATYSTYKI GRACZA ===\n"
+	st += "HP: " + str(player.hp) + " / " + str(5 + player.total_bonus_max_hp) + "\n"
+	st += "Mana: " + str(int(player.mana)) + " / " + str(int(player.base_max_mana + player.total_bonus_max_mana)) + "\n"
+	st += "Obrażenia: +" + str(player.total_bonus_damage_percent * 100) + "%\n"
+	st += "Szansa na Kryt: " + str((0.05 + player.total_crit_chance) * 100) + "%\n"
+	st += "Dodatkowe Pociski: +" + str(player.total_projectile_count) + "\n"
+	st += "Dodatkowe Dashe: +" + str(player.total_dash_count) + "\n"
+	st += "Prędkość: " + str(player.speed + player.total_bonus_speed) + "\n"
+	
+	# Dodanie tagów posiadanych przedmiotów (dla orientacji)
+	var all_tags = []
+	for item in player.inventory:
+		for tag in item.tags:
+			if not tag in all_tags: all_tags.append(tag)
+	st += "Tagi: " + str(all_tags)
+	
+	stats_label.text = st
