@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bl0ojwi8jmta0"]
+
+[ext_resource type="Script" uid="uid://dcroqc2sr2s2b" path="res://Entities/bullet.gd" id="1_cxyo3"]
+[ext_resource type="Texture2D" uid="uid://dmmsartuyjo12" path="res://Assets/Graphics/shock_muzzle.png" id="2_cxyo3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8qja"]
+size = Vector2(15, 10)
+
+[node name="Bullet" type="Area2D" unique_id=1842714058]
+script = ExtResource("1_cxyo3")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=444102957]
+modulate = Color(0.8980392, 0.9098039, 0.29411766, 1)
+position = Vector2(1.9999995, 2.682209e-07)
+scale = Vector2(1.3333334, 1.7142859)
+texture = ExtResource("2_cxyo3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1071899366]
+position = Vector2(-1.5, 0)
+shape = SubResource("RectangleShape2D_v8qja")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

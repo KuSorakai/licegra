@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://ckjco0j1bt7k6"]
+
+[ext_resource type="Script" uid="uid://dcroqc2sr2s2b" path="res://Entities/bullet.gd" id="1_4vffm"]
+[ext_resource type="Texture2D" uid="uid://ctr0pwwyeph47" path="res://Assets/Graphics/ice_muzzle.png" id="2_4vffm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v8qja"]
+size = Vector2(12, 12)
+
+[node name="Bullet" type="Area2D" unique_id=1842714058]
+script = ExtResource("1_4vffm")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=444102957]
+modulate = Color(0.8989366, 0.45108998, 0.29291764, 1)
+position = Vector2(1.3333335, -2.3841858e-07)
+scale = Vector2(1.4358976, 1.5555557)
+texture = ExtResource("2_4vffm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1071899366]
+shape = SubResource("RectangleShape2D_v8qja")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
