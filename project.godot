@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Licegra"
-run/main_scene="uid://cd8jhysroa5pi"
+run/main_scene="uid://d4mikf2nb7c6b"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://Assets/Graphics/icon.svg"
 
