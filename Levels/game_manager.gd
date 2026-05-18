@@ -2,6 +2,8 @@ extends Node
 
 @export var enemy_scene: PackedScene
 @export var triangle_scene: PackedScene # NASZ NOWY PRZECIWNIK
+@export var boss_scene: PackedScene # NASZ NOWY BOSS
+var boss_spawned_this_round: bool = false # Sprawdza, czy już go wypuściliśmy
 
 # Pobieramy referencję do gracza
 @onready var player = get_tree().get_first_node_in_group("player")
@@ -33,7 +35,14 @@ func _on_spawn_timer_timeout() -> void:
 	# --- LOGIKA LOSOWANIA WROGA ---
 	# Domyślnie zawsze szykujemy do wypuszczenia zwykłego Okręgu
 	var enemy_to_spawn = enemy_scene 
-	
+	if current_round > 0 and current_round % 5 == 0 and not boss_spawned_this_round and boss_scene != null:
+		enemy_to_spawn = boss_scene
+		boss_spawned_this_round = true
+	else:
+		# Zwykłe losowanie, jeśli nie wysyłamy Bossa
+		if current_round >= 2 and triangle_scene != null:
+			if randf() < 0.30: 
+				enemy_to_spawn = triangle_scene
 	# Jeśli jesteśmy w 2 rundzie lub wyżej...
 	if current_round >= 2 and triangle_scene != null:
 		# Losujemy liczbę od 0.0 do 1.0. 
@@ -68,7 +77,7 @@ func _on_round_timer_timeout() -> void:
 		# ZWIĘKSZAMY NUMER RUNDY!
 		current_round += 1
 		print("Rozpoczynam RUNDĘ ", current_round)
-		
+		boss_spawned_this_round = false # RESETUJEMY FLAGĘ NA POCZĄTKU RUNDY
 		# Żeby było ciekawiej, skracamy czas między spawnami wrogów
 		spawn_timer.wait_time = max(0.5, spawn_timer.wait_time - 0.05)
 		save_game()

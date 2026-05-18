@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d4mikf2nb7c6b"]
 
 [ext_resource type="Script" uid="uid://b6imqg4gexj6u" path="res://UI/main_menu.gd" id="1_p8ccj"]
+[ext_resource type="AudioStream" uid="uid://dfall11h8nf77" path="res://Assets/Audio/Winter_in_the_Hallway.ogg" id="2_tk8dj"]
 
 [node name="MainMenu" type="Control" unique_id=1046332733]
 layout_mode = 3
@@ -51,6 +52,11 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Rozpocznij Grę"
 
+[node name="SettingsButton" type="Button" parent="VBoxContainer" unique_id=1987459527]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "Ustawienia"
+
 [node name="CreditsButton" type="Button" parent="VBoxContainer" unique_id=348662524]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
@@ -88,8 +94,59 @@ layout_mode = 2
 size_flags_vertical = 8
 text = "Powrót"
 
+[node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=1346861441]
+stream = ExtResource("2_tk8dj")
+autoplay = true
+
+[node name="SettingsPanel" type="PanelContainer" parent="." unique_id=806525405]
+visible = false
+layout_mode = 0
+offset_left = 25.0
+offset_top = 23.0
+offset_right = 1129.0
+offset_bottom = 629.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsPanel" unique_id=943482570]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="SettingsPanel/VBoxContainer" unique_id=403587055]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "USTAWIENIA"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsPanel/VBoxContainer" unique_id=799330603]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/VBoxContainer/HBoxContainer" unique_id=1312532731]
+layout_mode = 2
+text = "Pełny ekran:"
+
+[node name="FullscreenToggle" type="CheckButton" parent="SettingsPanel/VBoxContainer/HBoxContainer" unique_id=689793655]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SettingsPanel/VBoxContainer" unique_id=1118731392]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SettingsPanel/VBoxContainer/HBoxContainer2" unique_id=1343781192]
+layout_mode = 2
+text = "Głośność:"
+
+[node name="VolumeSlider" type="HSlider" parent="SettingsPanel/VBoxContainer/HBoxContainer2" unique_id=966380867]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+
+[node name="CloseSettingsButton" type="Button" parent="SettingsPanel/VBoxContainer" unique_id=679319408]
+layout_mode = 2
+text = "Powrót"
+
 [connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="CreditsPanel/VBoxContainer/CloseCreditsButton" to="." method="_on_close_credits_button_pressed"]
+[connection signal="toggled" from="SettingsPanel/VBoxContainer/HBoxContainer/FullscreenToggle" to="." method="_on_fullscreen_toggle_toggled"]
+[connection signal="value_changed" from="SettingsPanel/VBoxContainer/HBoxContainer2/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="SettingsPanel/VBoxContainer/CloseSettingsButton" to="." method="_on_close_settings_button_pressed"]

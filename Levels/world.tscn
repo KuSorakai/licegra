@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b3fjkk3iqryfu" path="res://Entities/Player/player.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://cjmc8vtj8tcf4" path="res://Entities/Enemies/enemy.tscn" id="3_tlwt5"]
 [ext_resource type="Script" uid="uid://b1rhhm3tx8pln" path="res://Levels/game_manager.gd" id="4_4dvsh"]
+[ext_resource type="PackedScene" uid="uid://b1qocgric8ykh" path="res://Entities/Enemies/boss.tscn" id="6_06jdw"]
 [ext_resource type="PackedScene" uid="uid://wht6skhu31kf" path="res://UI/weapon_choice_screen.tscn" id="8_06jdw"]
 [ext_resource type="PackedScene" uid="uid://cfrumtbu1gxlm" path="res://Entities/Enemies/triangle.tscn" id="8_7ey7r"]
 [ext_resource type="PackedScene" uid="uid://dupcoa7fuq8gn" path="res://UI/level_up_screen.tscn" id="8_rljl1"]
@@ -79,6 +80,7 @@ shape = SubResource("RectangleShape2D_036b0")
 script = ExtResource("4_4dvsh")
 enemy_scene = ExtResource("3_tlwt5")
 triangle_scene = ExtResource("8_7ey7r")
+boss_scene = ExtResource("6_06jdw")
 
 [node name="RoundTimer" type="Timer" parent="GameManager" unique_id=1017503396]
 wait_time = 15.0

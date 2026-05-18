@@ -3,6 +3,7 @@ extends CharacterBody2D
 var speed: float = 300.0
 var dash_speed: float = 900.0 # Prędkość podczas uniku
 var is_dashing: bool = false
+var is_invincible: bool = false
 var can_dash: bool = true
 var hp: int = 5
 var mana: float = 10.0
@@ -107,47 +108,59 @@ func shoot() -> void:
 			return # Brak many = przerywamy strzał!
 	# SPRAWDZAMY CZY BROŃ MA PRZYPISANĄ SCENĘ POCISKU
 	if current_weapon.projectile_scene != null:
-		var bullet = current_weapon.projectile_scene.instantiate()
-		get_tree().root.add_child(bullet)
-		bullet.global_position = muzzle.global_position
-		bullet.global_rotation = muzzle.global_rotation
+		var base_rot = muzzle.global_rotation
+		var projectiles_to_fire = 1 + total_projectile_count
+		var spread_angle = deg_to_rad(15.0) # Kąt rozrzutu pocisków (15 stopni)
 		
-		# PRZEKAZANIE STATUSU Z BRONI DO POCISKU
-		bullet.status_effect = current_weapon.status_effect
-		
-		# --- OBLICZANIE MNOŻNIKA RZADKOŚCI ---
+		# --- OBLICZANIE WSPÓLNYCH OBRAŻEŃ ---
 		var rarity_mult: float = 1.0
 		match current_weapon.tier:
-			0: rarity_mult = 1.0 # Tier 1
-			1: rarity_mult = 1.3 # Tier 2
-			2: rarity_mult = 1.6 # Tier 3
-			3: rarity_mult = 2.0 # Tier 4
+			0: rarity_mult = 1.0
+			1: rarity_mult = 1.3
+			2: rarity_mult = 1.6
+			3: rarity_mult = 2.0
 			
-		# --- FINALNY WZÓR ---
-		# Obliczamy bazę z mnożnikiem rzadkości
 		var base_calculated_damage = current_weapon.base_attack * rarity_mult
-		# Dodajemy nasz potężny % z ekwipunku
 		var final_damage = base_calculated_damage + (base_calculated_damage * total_bonus_damage_percent)
 		var final_range = current_weapon.range * rarity_mult
 		
-		bullet.damage = final_damage
-		bullet.max_range = final_range
-		bullet.max_pierce = current_weapon.piercing # PRZEKAZUJEMY PRZEBICIE!
+		# --- PĘTLA STRZELAJĄCA WIELOMA POCISKAMI ---
+		for i in range(projectiles_to_fire):
+			var bullet = current_weapon.projectile_scene.instantiate()
+			get_tree().root.add_child(bullet)
+			bullet.global_position = muzzle.global_position
+			
+			# Magia trygonometrii: rozkładamy pociski równo w wachlarz
+			var angle_offset = 0.0
+			if projectiles_to_fire > 1:
+				angle_offset = spread_angle * (i - (projectiles_to_fire - 1) / 2.0)
+				
+			bullet.global_rotation = base_rot + angle_offset
+			
+			# PRZEKAZANIE DANYCH DO POCISKU
+			bullet.status_effect = current_weapon.status_effect
+			bullet.damage = final_damage
+			bullet.max_range = final_range
+			bullet.max_pierce = current_weapon.piercing
 		
 # Nasza nowa funkcja wykonująca unik
 func perform_dash() -> void:
 	is_dashing = true
 	can_dash = false # Blokujemy możliwość kolejnego uniku
-	
+	is_invincible = true # WŁĄCZAMY NIETYKALNOŚĆ
+	modulate.a = 0.5 # Postać staje się półprzezroczysta jak duch!
 	# "await" zatrzymuje wykonanie kodu w tej funkcji na podany czas.
 	# To definiuje jak długo trwa sam "skok" gracza.
 	await get_tree().create_timer(0.2).timeout
 	is_dashing = false # Koniec uniku, wracamy do normalnej prędkości
-	
+	is_invincible = false # WYŁĄCZAMY NIETYKALNOŚĆ
+	modulate.a = 1.0 # Wracamy do pełnych kolorów
 	# Czas odnowienia: czekamy 2 sekundy, tak jak opisałeś w GDD
 	await get_tree().create_timer(2.0).timeout
 	can_dash = true # Dash znowu gotowy do użycia!
 func take_damage(amount: int) -> void:
+	if is_invincible:
+		return
 	hp -= amount
 	if health_bar != null:
 		health_bar.value = hp

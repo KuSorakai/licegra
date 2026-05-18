@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var damage_zone = $DamageZone
 @onready var attack_timer = $AttackTimer
 @export var gem_scene: PackedScene
+@export var gem_drop_count: int = 1 # Zwykły wróg wyrzuca 1. Boss wyrzuci np. 30!
 
 # --- NOWE ZMIENNE DO EFEKTÓW ---
 @onready var sprite = $Sprite2D
@@ -81,11 +82,16 @@ func apply_shock(base_dmg: int) -> void:
 # Nowa funkcja odpowiadająca za tworzenie kryształu
 func spawn_gem() -> void:
 	if gem_scene != null:
-		var gem = gem_scene.instantiate()
-		# Kryształ pojawia się tam, gdzie zginął wróg
-		gem.global_position = global_position
-		# Bezpieczne dodanie obiektu do świata gry, gdy usuwamy wroga
-		get_parent().call_deferred("add_child", gem)
+		# Pętla wykonuje się tyle razy, ile gemów ma wypaść
+		for i in range(gem_drop_count):
+			var gem = gem_scene.instantiate()
+			
+			# Tworzymy lekki rozrzut (od -40 do 40 pikseli wokół wroga)
+			var random_offset = Vector2(randf_range(-40, 40), randf_range(-40, 40))
+			gem.global_position = global_position + random_offset
+			
+			# call_deferred upewnia się, że silnik bezpiecznie doda gemy tuż po śmierci wroga
+			get_tree().root.call_deferred("add_child", gem)
 
 
 # 1. Kiedy gracz WEJDZIE w przeciwnika

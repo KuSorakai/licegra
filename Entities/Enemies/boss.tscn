@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://b1qocgric8ykh"]
+
+[ext_resource type="Script" uid="uid://cnkwnyhxaw8xu" path="res://Entities/Enemies/enemy.gd" id="1_2s6dd"]
+[ext_resource type="PackedScene" uid="uid://cxavvdg6vt0mb" path="res://Entities/Items/experience_gem.tscn" id="2_rqxqw"]
+[ext_resource type="Texture2D" uid="uid://da6ekqyyq3aam" path="res://Assets/Graphics/icon.svg" id="3_v7k4x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gyqm"]
+radius = 64.03124
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qi2p4"]
+radius = 65.192024
+
+[node name="Boss" type="CharacterBody2D" unique_id=2056328923 groups=["enemy"]]
+script = ExtResource("1_2s6dd")
+hp = 50
+speed = 80.0
+gem_scene = ExtResource("2_rqxqw")
+gem_drop_count = 30
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1628923524]
+modulate = Color(0.62557507, 1.4318898e-06, 5.7756904e-07, 1)
+scale = Vector2(2, 2)
+texture = ExtResource("3_v7k4x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1922543019]
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_4gyqm")
+
+[node name="DamageZone" type="Area2D" parent="." unique_id=1325977422]
+scale = Vector2(2, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageZone" unique_id=36127031]
+shape = SubResource("CircleShape2D_qi2p4")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1197339259]
+
+[connection signal="body_entered" from="DamageZone" to="." method="_on_damage_zone_body_entered"]
+[connection signal="body_exited" from="DamageZone" to="." method="_on_damage_zone_body_exited"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
