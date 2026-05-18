@@ -23,6 +23,7 @@ func _process(delta: float) -> void:
 
 func _ready() -> void:
 	print("Rozpoczynam RUNDĘ ", current_round)
+	load_game() # ZAWSZE PRÓBUJEMY WCZYTAĆ NA STARCIE
 
 # Wykonuje się co 1.5 sekundy (SpawnTimer)
 func _on_spawn_timer_timeout() -> void:
@@ -70,7 +71,78 @@ func _on_round_timer_timeout() -> void:
 		
 		# Żeby było ciekawiej, skracamy czas między spawnami wrogów
 		spawn_timer.wait_time = max(0.5, spawn_timer.wait_time - 0.05)
-		
+		save_game()
 		# --- NAPRAWA: ODPALAMY ZEGARY NA NOWO! ---
 		round_timer.start()
 		spawn_timer.start()
+		
+# --- SYSTEM ZAPISU ---
+func save_game() -> void:
+	if player == null: return
+	
+	# Zbieramy ścieżki do wszystkich przedmiotów w plecaku
+	var inv_paths = []
+	for item in player.inventory:
+		inv_paths.append(item.resource_path)
+		
+	# Tworzymy słownik z pełnymi danymi gry
+	var save_data = {
+		"current_round": current_round,
+		"player_hp": player.hp,
+		"player_level": player.level,
+		"player_exp": player.current_exp,
+		"player_exp_to_next": player.exp_to_next_level,
+		"weapon_path": player.current_weapon.resource_path if player.current_weapon else "",
+		"inventory_paths": inv_paths
+	}
+	
+	# Zapisujemy słownik jako JSON na dysk gracza
+	var file = FileAccess.open("user://save_game.dat", FileAccess.WRITE)
+	file.store_string(JSON.stringify(save_data))
+	file.close()
+	print("--> GRA ZAPISANA POMYŚLNIE! <--")
+
+func load_game() -> void:
+	if not FileAccess.file_exists("user://save_game.dat"):
+		return # Brak pliku, gramy normalnie
+		
+	# Odczytujemy JSONa
+	var file = FileAccess.open("user://save_game.dat", FileAccess.READ)
+	var content = file.get_as_text()
+	file.close()
+	
+	var json = JSON.new()
+	if json.parse(content) == OK:
+		var data = json.data
+		
+		# Odtwarzamy RUNDĘ
+		current_round = data["current_round"]
+		
+		# Odtwarzamy Gracza
+		if player != null:
+			player.hp = data["player_hp"]
+			player.level = data["player_level"]
+			player.current_exp = data["player_exp"]
+			player.exp_to_next_level = data["player_exp_to_next"]
+			
+			# Wczytujemy zapisaną broń
+			var w_path = data["weapon_path"]
+			if w_path != "":
+				var loaded_weapon = load(w_path)
+				player.equip_weapon(loaded_weapon)
+				
+			# Wczytujemy przedmioty (funkcja add_item sama odświeży UI i statystyki!)
+			for i_path in data["inventory_paths"]:
+				var loaded_item = load(i_path)
+				player.add_item(loaded_item)
+				
+			# Aktualizacja Pasków HUD (HP i EXP)
+			var exp_bar = get_tree().get_first_node_in_group("exp_bar")
+			if exp_bar:
+				exp_bar.max_value = player.exp_to_next_level
+				exp_bar.value = player.current_exp
+			if player.health_bar:
+				player.health_bar.max_value = 5 + player.total_bonus_max_hp
+				player.health_bar.value = player.hp
+				
+		print("--> GRA WCZYTANA POMYŚLNIE! <--")

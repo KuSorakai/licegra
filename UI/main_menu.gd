@@ -22,6 +22,9 @@ func _ready() -> void:
 func _on_start_button_pressed() -> void:
 	# Jeśli gracz zaczyna nową grę, możemy opcjonalnie usunąć stary zapis,
 	# lub po prostu załadować czystą scenę.
+	# Jeśli istnieje stary zapis, kasujemy go, by zacząć czystą grę!
+	if FileAccess.file_exists(SAVE_PATH):
+		DirAccess.remove_absolute(SAVE_PATH)
 	get_tree().change_scene_to_file("res://Levels/world.tscn")
 
 # Wywoływane po kliknięciu "Kontynuuj"

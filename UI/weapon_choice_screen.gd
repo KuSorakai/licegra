@@ -11,6 +11,10 @@ var offered_weapons: Array[WeaponData] = []
 var player: CharacterBody2D
 
 func _ready() -> void:
+	# BŁYSKAWICZNY TEST: Czy to jest wczytywana gra?
+	if FileAccess.file_exists("user://save_game.dat"):
+		queue_free() # Usuwamy ekran, zanim w ogóle zapauzuje grę!
+		return
 	# BŁYSKAWICZNIE ZATRZYMUJEMY GRĘ NA SAMYM STARCIE
 	get_tree().paused = true 
 	player = get_tree().get_first_node_in_group("player")
