@@ -70,9 +70,7 @@ func _physics_process(delta: float) -> void:
 		mana += mana_regen * delta
 		if mana > current_max_mana: mana = current_max_mana
 		
-	if mana_bar != null:
-		mana_bar.max_value = current_max_mana
-		mana_bar.value = mana
+	update_ui_bars()
 	
 	# --- CELOWANIE ---
 	# Jeśli broń ma tag "magic", szukamy wroga. Jak nie ma, strzelamy myszką.
@@ -106,6 +104,7 @@ func shoot() -> void:
 	if current_weapon.mana_cost > 0:
 		if mana >= current_weapon.mana_cost:
 			mana -= current_weapon.mana_cost # Pobieramy manę
+			update_ui_bars() # OD RAZU AKTUALIZUJEMY PASEK!
 		else:
 			return # Brak many = przerywamy strzał!
 	# SPRAWDZAMY CZY BROŃ MA PRZYPISANĄ SCENĘ POCISKU
@@ -166,8 +165,7 @@ func take_damage(amount: int) -> void:
 	if is_invincible:
 		return
 	hp -= amount
-	if health_bar != null:
-		health_bar.value = hp
+	update_ui_bars()
 	print("Aua! Otrzymałem obrażenia. Aktualne HP: ", hp)
 	   
 	if hp <= 0:
@@ -269,11 +267,8 @@ func calculate_stats() -> void:
 		
 	# 3. Zastosowanie dodatkowego HP do paska nad głową
 	# Nasze bazowe HP to 5. Zwiększamy "pojemność" paska.
-	if health_bar != null:
-		health_bar.max_value = 5 + total_bonus_max_hp
-		# Opcjonalnie: uleczenie gracza przy zdobyciu max HP
-		hp += total_bonus_max_hp 
-		health_bar.value = hp
+	hp += total_bonus_max_hp # Leczy gracza przy zdobyciu max HP
+	update_ui_bars()
 		
 	print("Przeliczono! Speed: +", total_bonus_speed, " Max HP: +", total_bonus_max_hp)
 	
@@ -295,3 +290,26 @@ func equip_weapon(new_weapon: WeaponData) -> void:
 	var weapon_icon_rect = get_node_or_null("../HUD/WeaponIcon")
 	if weapon_icon_rect != null and current_weapon.icon != null:
 		weapon_icon_rect.texture = current_weapon.icon
+func update_ui_bars() -> void:
+	# --- OBLICZANIE MAKSYMALNYCH WARTOŚCI ---
+	var current_max_hp = 5 + total_bonus_max_hp
+	var current_max_mana = base_max_mana + total_bonus_max_mana
+	
+	# --- 1. PASKI NAD GŁOWĄ GRACZA (To są prawdziwe paski) ---
+	if health_bar != null:
+		health_bar.max_value = current_max_hp
+		health_bar.value = hp
+	if mana_bar != null:
+		mana_bar.max_value = current_max_mana
+		mana_bar.value = mana
+		
+	# --- 2. NAPISY W ROGACH EKRANU (To są węzły Label) ---
+	var hud_hp = get_node_or_null("../HUD/HpUI")
+	if hud_hp != null:
+		# Zmieniamy właściwość text i budujemy ładny napis, np. "HP: 5 / 5"
+		hud_hp.text = "HP: " + str(hp) + " / " + str(current_max_hp)
+		
+	var hud_mana = get_node_or_null("../HUD/ManaUI")
+	if hud_mana != null:
+		# Zmieniamy właściwość text i budujemy ładny napis, np. "Mana: 10 / 10"
+		hud_mana.text = "Mana: " + str(int(mana)) + " / " + str(int(current_max_mana))
