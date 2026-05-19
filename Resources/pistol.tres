@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bbpib0xp8ud7" path="res://Entities/Projectiles/bullet.tscn" id="1_7j71y"]
 [ext_resource type="Texture2D" uid="uid://brrt5n70c0gcj" path="res://Assets/Graphics/W_Gun003.png" id="1_56pew"]
 [ext_resource type="Script" uid="uid://0j0it5oiaiep" path="res://Resources/weapon_data.gd" id="1_tkhkc"]
+[ext_resource type="AudioStream" uid="uid://bpp8u0nmqykj7" path="res://Assets/Audio/8bit_gunloop_explosion.wav" id="4_yvly7"]
 
 [resource]
 script = ExtResource("1_tkhkc")
@@ -11,4 +12,6 @@ icon = ExtResource("1_56pew")
 attack_speed = 2.5
 projectile_scene = ExtResource("1_7j71y")
 tags = Array[String](["range", "projectile"])
+shoot_sound = ExtResource("4_yvly7")
+shoot_sound_volume = -20.0
 metadata/_custom_type_script = "uid://0j0it5oiaiep"

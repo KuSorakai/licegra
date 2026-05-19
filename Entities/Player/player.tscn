@@ -64,4 +64,6 @@ max_value = 5.0
 value = 5.0
 show_percentage = false
 
+[node name="ShootSoundPlayer" type="AudioStreamPlayer" parent="." unique_id=1769963337]
+
 [connection signal="area_entered" from="MagnetArea" to="." method="_on_magnet_area_area_entered"]

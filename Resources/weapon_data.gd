@@ -16,3 +16,5 @@ class_name WeaponData
 @export var status_effect: String = "" # np. "Fire", "Freeze", "Shock"
 @export var mana_cost: float = 0.0 # Koszt many za jeden strzał
 @export var tags: Array[String] = [] # np. ["range", "projectile"]
+@export var shoot_sound: AudioStream
+@export var shoot_sound_volume: float = 0.0

@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b245t2htlkd27" path="res://Assets/Graphics/Gemini_Generated_Image_pi187npi187npi18 (1).png" id="1_v0p3n"]
 [ext_resource type="PackedScene" uid="uid://b3fjkk3iqryfu" path="res://Entities/Player/player.tscn" id="2_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://cjmc8vtj8tcf4" path="res://Entities/Enemies/enemy.tscn" id="3_tlwt5"]
+[ext_resource type="Texture2D" uid="uid://dpqgkne23qxw2" path="res://Assets/Graphics/dirt.png" id="3_ypq2k"]
 [ext_resource type="Script" uid="uid://b1rhhm3tx8pln" path="res://Levels/game_manager.gd" id="4_4dvsh"]
 [ext_resource type="PackedScene" uid="uid://b1qocgric8ykh" path="res://Entities/Enemies/boss.tscn" id="6_06jdw"]
 [ext_resource type="PackedScene" uid="uid://wht6skhu31kf" path="res://UI/weapon_choice_screen.tscn" id="8_06jdw"]
@@ -72,18 +73,51 @@ position = Vector2(135, 65)
 [node name="WallTop" type="CollisionShape2D" parent="ArenaBounds" unique_id=301685215]
 position = Vector2(0, -486)
 shape = SubResource("RectangleShape2D_fj7yv")
+debug_color = Color(0.88336897, 0.18784016, 0.48706847, 0.44705883)
+
+[node name="TextureRect" type="TextureRect" parent="ArenaBounds/WallTop" unique_id=307053584]
+offset_left = -870.0
+offset_top = 11.0
+offset_right = 865.0
+offset_bottom = 46.0
+texture = ExtResource("3_ypq2k")
+stretch_mode = 1
 
 [node name="WallBottom" type="CollisionShape2D" parent="ArenaBounds" unique_id=1920603332]
 position = Vector2(0, 486)
 shape = SubResource("RectangleShape2D_tlwt5")
 
+[node name="TextureRect2" type="TextureRect" parent="ArenaBounds/WallBottom" unique_id=428398582]
+offset_left = -861.0
+offset_top = -42.0
+offset_right = 874.0
+offset_bottom = -7.0
+texture = ExtResource("3_ypq2k")
+stretch_mode = 1
+
 [node name="WallLeft" type="CollisionShape2D" parent="ArenaBounds" unique_id=576720328]
 position = Vector2(-864, 0)
 shape = SubResource("RectangleShape2D_aqk2v")
 
+[node name="TextureRect3" type="TextureRect" parent="ArenaBounds/WallLeft" unique_id=845921786]
+offset_left = 11.0
+offset_top = -461.0
+offset_right = 46.0
+offset_bottom = 456.0
+texture = ExtResource("3_ypq2k")
+stretch_mode = 1
+
 [node name="WallRight" type="CollisionShape2D" parent="ArenaBounds" unique_id=976884432]
 position = Vector2(864, 0)
 shape = SubResource("RectangleShape2D_036b0")
+
+[node name="TextureRect4" type="TextureRect" parent="ArenaBounds/WallRight" unique_id=1000837567]
+offset_left = -50.0
+offset_top = -455.0
+offset_right = -15.0
+offset_bottom = 462.0
+texture = ExtResource("3_ypq2k")
+stretch_mode = 1
 
 [node name="GameManager" type="Node" parent="." unique_id=1422348163 groups=["game_manager"]]
 script = ExtResource("4_4dvsh")
@@ -141,6 +175,7 @@ offset_left = 144.0
 offset_top = 604.0
 offset_right = 1039.0
 offset_bottom = 631.0
+size_flags_vertical = 8
 
 [node name="LevelUpScreen" parent="HUD" unique_id=1461312053 instance=ExtResource("8_rljl1")]
 
@@ -172,7 +207,7 @@ offset_bottom = 105.0
 
 [node name="GameplayMusic" type="AudioStreamPlayer" parent="." unique_id=2119716497]
 stream = ExtResource("12_v0p3n")
-volume_db = -15.0
+volume_db = -25.0
 autoplay = true
 
 [connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]

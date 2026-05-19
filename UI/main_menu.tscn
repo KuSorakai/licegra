@@ -87,7 +87,10 @@ Reactorcore
 http://www.reactorcoregames.com
 Cethiel
 Henrique Lazarini (7Soul1)
-https://www.deviantart.com/7soul1"
+https://www.deviantart.com/7soul1
+Audio:
+Luke.RUSTLTD https://opengameart.org/users/lukerustltd
+Ben Jaszczak & Brian Nelson "
 
 [node name="CloseCreditsButton" type="Button" parent="CreditsPanel/VBoxContainer" unique_id=1054434245]
 layout_mode = 2

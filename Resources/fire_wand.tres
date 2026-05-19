@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://r5vcxmi8iikq" path="res://Entities/Projectiles/fire_bullet.tscn" id="1_7n1kd"]
 [ext_resource type="Texture2D" uid="uid://dm4j4vvqtmscx" path="res://Assets/Graphics/W_Staff01.png" id="1_bm7qx"]
 [ext_resource type="Script" uid="uid://0j0it5oiaiep" path="res://Resources/weapon_data.gd" id="1_v5g0w"]
+[ext_resource type="AudioStream" uid="uid://c6qaoi6u61a41" path="res://Assets/Audio/Wand_s.wav" id="4_klyki"]
 
 [resource]
 script = ExtResource("1_v5g0w")
@@ -13,4 +14,6 @@ projectile_scene = ExtResource("1_7n1kd")
 status_effect = "Fire"
 mana_cost = 2.0
 tags = Array[String](["magic", "fire", "range"])
+shoot_sound = ExtResource("4_klyki")
+shoot_sound_volume = -15.0
 metadata/_custom_type_script = "uid://0j0it5oiaiep"

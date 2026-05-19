@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://0j0it5oiaiep" path="res://Resources/weapon_data.gd" id="1_880yl"]
 [ext_resource type="Texture2D" uid="uid://cfboc1swcjtpu" path="res://Assets/Graphics/W_Staff04.png" id="1_gbvlk"]
 [ext_resource type="PackedScene" uid="uid://ckjco0j1bt7k6" path="res://Entities/Projectiles/freeze_bullet.tscn" id="1_jo4kj"]
+[ext_resource type="AudioStream" uid="uid://c6qaoi6u61a41" path="res://Assets/Audio/Wand_s.wav" id="4_5hj5x"]
 
 [resource]
 script = ExtResource("1_880yl")
@@ -13,4 +14,6 @@ projectile_scene = ExtResource("1_jo4kj")
 status_effect = "Freeze"
 mana_cost = 2.0
 tags = Array[String](["magic", "ice", "range"])
+shoot_sound = ExtResource("4_5hj5x")
+shoot_sound_volume = -15.0
 metadata/_custom_type_script = "uid://0j0it5oiaiep"

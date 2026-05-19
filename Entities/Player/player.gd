@@ -26,6 +26,7 @@ var total_apply_status: String = "" # Globalny status z przedmiotów (np. Fiolki
 var total_bonus_speed: float = 0.0 # NOWE
 @onready var health_bar = $HealthBar
 @onready var mana_bar = $ManaBar
+@onready var shoot_sound_player = $ShootSoundPlayer
 
 var total_crit_chance: float = 0.0
 var total_projectile_count: int = 0
@@ -107,6 +108,12 @@ func shoot() -> void:
 			update_ui_bars() # OD RAZU AKTUALIZUJEMY PASEK!
 		else:
 			return # Brak many = przerywamy strzał!
+	if current_weapon.shoot_sound != null and shoot_sound_player != null:
+		# Ustawiamy dźwięk na ten z obecnej broni
+		shoot_sound_player.stream = current_weapon.shoot_sound
+		shoot_sound_player.volume_db = current_weapon.shoot_sound_volume
+		# Odpalamy dźwięk!
+		shoot_sound_player.play()
 	# SPRAWDZAMY CZY BROŃ MA PRZYPISANĄ SCENĘ POCISKU
 	if current_weapon.projectile_scene != null:
 		var base_rot = muzzle.global_rotation
