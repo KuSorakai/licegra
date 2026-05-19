@@ -143,7 +143,6 @@ func shoot() -> void:
 			bullet.global_rotation = base_rot + angle_offset
 			
 			# PRZEKAZANIE DANYCH DO POCISKU
-			bullet.status_effect = current_weapon.status_effect
 			bullet.damage = final_damage
 			bullet.max_range = final_range
 			bullet.max_pierce = current_weapon.piercing
