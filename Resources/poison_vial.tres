@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://chif7m0drjpet"]
+
+[ext_resource type="Script" uid="uid://dsw3ypyo66y1d" path="res://Resources/item_data.gd" id="1_mwtlv"]
+[ext_resource type="Texture2D" uid="uid://b8r7bijpqjqio" path="res://Assets/Graphics/I_Antidote.png" id="1_trjft"]
+
+[resource]
+script = ExtResource("1_mwtlv")
+item_name = "Fiolka Trucizny"
+icon = ExtResource("1_trjft")
+description = "Nadaje Twoim pociskom efekt zatrucia."
+tags = Array[String](["ALL"])
+apply_status = "Poison"
+metadata/_custom_type_script = "uid://dsw3ypyo66y1d"

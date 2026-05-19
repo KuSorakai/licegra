@@ -5,11 +5,14 @@
 [ext_resource type="Resource" uid="uid://d8rexek7srst" path="res://Resources/amulet.tres" id="3_ekg6u"]
 [ext_resource type="Resource" uid="uid://cx631pc0aesor" path="res://Resources/boots.tres" id="4_3ydxw"]
 [ext_resource type="Resource" uid="uid://qm7g6iveieq2" path="res://Resources/ring_of_power.tres" id="5_e5srg"]
+[ext_resource type="Resource" uid="uid://cpskok2rvwyvm" path="res://Resources/book_of_knowledge.tres" id="6_e5srg"]
+[ext_resource type="Resource" uid="uid://br0lmxngtkwop" path="res://Resources/multishot_ring.tres" id="7_qdheq"]
+[ext_resource type="Resource" uid="uid://chif7m0drjpet" path="res://Resources/poison_vial.tres" id="8_nbgab"]
 
 [node name="LevelUpScreen" type="CanvasLayer" unique_id=1461312053]
 process_mode = 3
 script = ExtResource("1_4wurp")
-item_pool = Array[ExtResource("2_2fqix")]([ExtResource("3_ekg6u"), ExtResource("4_3ydxw"), ExtResource("5_e5srg")])
+item_pool = Array[ExtResource("2_2fqix")]([ExtResource("3_ekg6u"), ExtResource("4_3ydxw"), ExtResource("5_e5srg"), ExtResource("6_e5srg"), ExtResource("7_qdheq"), ExtResource("8_nbgab")])
 
 [node name="Background" type="ColorRect" parent="." unique_id=1364181123]
 anchors_preset = 15

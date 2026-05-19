@@ -46,6 +46,8 @@ func take_damage(amount: float, status: String = "") -> void:
 		apply_freeze()
 	elif status == "Shock":
 		apply_shock(final_damage)
+	elif status == "Poison":
+		apply_poison() # NOWE
 	if hp <= 0:
 		spawn_gem()
 		queue_free() # Ta funkcja trwale usuwa obiekt z gry (śmierć)
@@ -113,3 +115,13 @@ func _on_attack_timer_timeout() -> void:
 	for b in bodies:
 		if b.is_in_group("player"):
 			b.take_damage(1) # Zadajemy kolejne obrażenia
+func apply_poison() -> void:
+	for i in range(5): # 5 uderzeń trucizny
+		await get_tree().create_timer(1.0).timeout
+		if not is_inside_tree(): return # Zabezpieczenie, jeśli wróg zginie z innego powodu
+		hp -= 1
+		sprite.modulate = Color(0.4, 0.9, 0.2) # Zmiana koloru na toksyczną zieleń
+		if hp <= 0:
+			spawn_gem()
+			queue_free()
+			break

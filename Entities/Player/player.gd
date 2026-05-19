@@ -21,6 +21,8 @@ var total_bonus_damage_percent: float = 0.0
 var total_bonus_strength: int = 0
 var total_bonus_max_hp: int = 0    # NOWE
 var total_bonus_max_mana: int = 0    # NOWE
+var total_bonus_intelligence: int = 0
+var total_apply_status: String = "" # Globalny status z przedmiotów (np. Fiolki)
 var total_bonus_speed: float = 0.0 # NOWE
 @onready var health_bar = $HealthBar
 @onready var mana_bar = $ManaBar
@@ -111,7 +113,6 @@ func shoot() -> void:
 		var base_rot = muzzle.global_rotation
 		var projectiles_to_fire = 1 + total_projectile_count
 		var spread_angle = deg_to_rad(15.0) # Kąt rozrzutu pocisków (15 stopni)
-		
 		# --- OBLICZANIE WSPÓLNYCH OBRAŻEŃ ---
 		var rarity_mult: float = 1.0
 		match current_weapon.tier:
@@ -129,6 +130,10 @@ func shoot() -> void:
 			var bullet = current_weapon.projectile_scene.instantiate()
 			get_tree().root.add_child(bullet)
 			bullet.global_position = muzzle.global_position
+			if current_weapon.status_effect != "":
+				bullet.status_effect = current_weapon.status_effect
+			else:
+				bullet.status_effect = total_apply_status
 			
 			# Magia trygonometrii: rozkładamy pociski równo w wachlarz
 			var angle_offset = 0.0
@@ -238,9 +243,11 @@ func calculate_stats() -> void:
 	# 1. Resetujemy obecne bonusy
 	total_bonus_damage_percent = 0.0
 	total_bonus_strength = 0
+	total_bonus_intelligence = 0
 	total_bonus_max_hp = 0
 	total_bonus_speed = 0.0
 	total_crit_chance = 0.0
+	total_apply_status = ""
 	total_projectile_count = 0
 	total_dash_count = 0
 	
@@ -248,11 +255,14 @@ func calculate_stats() -> void:
 	for item in inventory:
 		total_bonus_damage_percent += item.bonus_damage_percent
 		total_bonus_strength += item.bonus_strength
+		total_bonus_intelligence += item.bonus_intelligence
 		total_bonus_max_hp += item.bonus_max_hp
 		total_bonus_speed += item.bonus_speed
 		total_crit_chance += item.bonus_crit_chance
 		total_projectile_count += item.bonus_projectiles
 		total_dash_count += item.bonus_dashes
+		if item.apply_status != "":
+			total_apply_status = item.apply_status
 		
 	# 3. Zastosowanie dodatkowego HP do paska nad głową
 	# Nasze bazowe HP to 5. Zwiększamy "pojemność" paska.

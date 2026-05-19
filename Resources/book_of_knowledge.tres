@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cpskok2rvwyvm"]
+
+[ext_resource type="Script" uid="uid://dsw3ypyo66y1d" path="res://Resources/item_data.gd" id="1_2isoy"]
+[ext_resource type="Texture2D" uid="uid://dmr6ecs7auvgr" path="res://Assets/Graphics/I_Book.png" id="1_tdeid"]
+
+[resource]
+script = ExtResource("1_2isoy")
+icon = ExtResource("1_tdeid")
+description = "+3 Inteligencji."
+tags = Array[String](["magic"])
+bonus_intelligence = 3
+metadata/_custom_type_script = "uid://dsw3ypyo66y1d"
