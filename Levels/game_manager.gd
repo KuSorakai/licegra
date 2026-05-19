@@ -72,7 +72,19 @@ func _on_round_timer_timeout() -> void:
 	
 	# Zgodnie z GDD gra trwa max 20 rund.
 	if current_round >= 20:
-		top_label.text = "WYGRANA!"
+		print("WYGRANA!")
+		round_timer.stop()
+		spawn_timer.stop()
+		var gameplay_music = get_node_or_null("%GameplayMusic")
+		if gameplay_music != null:
+			gameplay_music.stop()
+		# Opcjonalnie kasujemy zapis, bo gra została ukończona!
+		if FileAccess.file_exists("user://save_game.dat"):
+			DirAccess.remove_absolute("user://save_game.dat")
+		
+		var victory_screen = get_node_or_null("../HUD/VictoryScreen")
+		if victory_screen != null:
+			victory_screen.trigger_victory()
 	else:
 		# ZWIĘKSZAMY NUMER RUNDY!
 		current_round += 1

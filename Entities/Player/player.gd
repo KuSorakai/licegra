@@ -172,7 +172,9 @@ func take_damage(amount: int) -> void:
 	   
 	if hp <= 0:
 		print("Koniec Gry!")
-		
+		var gameplay_music = get_node_or_null("%GameplayMusic")
+		if gameplay_music != null:
+			gameplay_music.stop()
 		# Szukamy naszego menedżera, by zapytać go o numer rundy
 		var gm = get_tree().get_first_node_in_group("game_manager")
 		var current_round = 1

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cfrumtbu1gxlm"]
 
-[ext_resource type="Script" uid="uid://cnkwnyhxaw8xu" path="res://Entities/Enemies/enemy.gd" id="1_3qs5k"]
+[ext_resource type="Script" uid="uid://cpj82ihns6l4y" path="res://Entities/Enemies/triangle.gd" id="1_3qs5k"]
 [ext_resource type="PackedScene" uid="uid://cxavvdg6vt0mb" path="res://Entities/Items/experience_gem.tscn" id="2_nptmn"]
 [ext_resource type="Texture2D" uid="uid://da6ekqyyq3aam" path="res://Assets/Graphics/icon.svg" id="3_y8axh"]
 
@@ -11,10 +11,11 @@ radius = 64.03124
 radius = 65.192024
 
 [node name="Enemy" type="CharacterBody2D" unique_id=2056328923 groups=["enemy"]]
+collision_mask = 0
 script = ExtResource("1_3qs5k")
-hp = 1
-speed = 300.0
+hp = 4
 gem_scene = ExtResource("2_nptmn")
+gem_drop_count = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1628923524]
 modulate = Color(0.8484841, 0.71750826, 0, 1)

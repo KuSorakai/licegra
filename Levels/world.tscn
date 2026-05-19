@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://c1ume8vqveqnm" path="res://UI/pause_menu.tscn" id="8_ay5oo"]
 [ext_resource type="PackedScene" uid="uid://dupcoa7fuq8gn" path="res://UI/level_up_screen.tscn" id="8_rljl1"]
 [ext_resource type="PackedScene" uid="uid://c24mg71h7wvp6" path="res://UI/game_over_screen.tscn" id="9_06jdw"]
+[ext_resource type="PackedScene" uid="uid://p8u604lvru2j" path="res://UI/victory_screen.tscn" id="11_ay5oo"]
+[ext_resource type="AudioStream" uid="uid://dyk0twl5vy2y0" path="res://Assets/Audio/Steel_Against_the_Tide.ogg" id="12_v0p3n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fj7yv"]
 size = Vector2(1728, 100)
@@ -159,6 +161,12 @@ expand_mode = 1
 offset_top = 65.0
 offset_right = 40.0
 offset_bottom = 105.0
+
+[node name="VictoryScreen" parent="HUD" unique_id=1131633815 instance=ExtResource("11_ay5oo")]
+
+[node name="GameplayMusic" type="AudioStreamPlayer" parent="." unique_id=2119716497]
+stream = ExtResource("12_v0p3n")
+autoplay = true
 
 [connection signal="timeout" from="GameManager/RoundTimer" to="GameManager" method="_on_round_timer_timeout"]
 [connection signal="timeout" from="GameManager/SpawnTimer" to="GameManager" method="_on_spawn_timer_timeout"]
