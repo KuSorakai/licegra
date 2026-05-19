@@ -96,6 +96,7 @@ text = "Powrót"
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=1346861441]
 stream = ExtResource("2_tk8dj")
+volume_db = -15.0
 autoplay = true
 
 [node name="SettingsPanel" type="PanelContainer" parent="." unique_id=806525405]
