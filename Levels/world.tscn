@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b1qocgric8ykh" path="res://Entities/Enemies/boss.tscn" id="6_06jdw"]
 [ext_resource type="PackedScene" uid="uid://wht6skhu31kf" path="res://UI/weapon_choice_screen.tscn" id="8_06jdw"]
 [ext_resource type="PackedScene" uid="uid://cfrumtbu1gxlm" path="res://Entities/Enemies/triangle.tscn" id="8_7ey7r"]
+[ext_resource type="PackedScene" uid="uid://c1ume8vqveqnm" path="res://UI/pause_menu.tscn" id="8_ay5oo"]
 [ext_resource type="PackedScene" uid="uid://dupcoa7fuq8gn" path="res://UI/level_up_screen.tscn" id="8_rljl1"]
 [ext_resource type="PackedScene" uid="uid://c24mg71h7wvp6" path="res://UI/game_over_screen.tscn" id="9_06jdw"]
 
@@ -134,6 +135,8 @@ offset_right = 1039.0
 offset_bottom = 631.0
 
 [node name="LevelUpScreen" parent="HUD" unique_id=1461312053 instance=ExtResource("8_rljl1")]
+
+[node name="PauseMenu" parent="HUD" unique_id=1898718046 instance=ExtResource("8_ay5oo")]
 
 [node name="GameOverScreen" parent="HUD" unique_id=820338797 instance=ExtResource("9_06jdw")]
 
