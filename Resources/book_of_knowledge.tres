@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_2isoy")
+item_name = "Księga inteligencji"
 icon = ExtResource("1_tdeid")
 description = "+3 Inteligencji."
 tags = Array[String](["magic"])

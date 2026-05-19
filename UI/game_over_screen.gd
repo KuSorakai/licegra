@@ -14,4 +14,7 @@ func trigger_game_over(round_reached: int) -> void:
 # Pamiętaj o podłączeniu sygnału pressed() z przycisku do tej funkcji!
 func _on_restart_button_pressed() -> void:
 	get_tree().paused = false # Odpauzowujemy grę
-	get_tree().reload_current_scene() # Magia! Godot sam resetuje cały poziom
+	if FileAccess.file_exists("user://save_game.dat"):
+		DirAccess.remove_absolute("user://save_game.dat")
+	# Wczytanie gry od nowa
+	get_tree().change_scene_to_file("res://Levels/world.tscn")

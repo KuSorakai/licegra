@@ -172,6 +172,8 @@ func take_damage(amount: int) -> void:
 	   
 	if hp <= 0:
 		print("Koniec Gry!")
+		if FileAccess.file_exists("user://save_game.dat"):
+			DirAccess.remove_absolute("user://save_game.dat")
 		var gameplay_music = get_node_or_null("%GameplayMusic")
 		if gameplay_music != null:
 			gameplay_music.stop()
